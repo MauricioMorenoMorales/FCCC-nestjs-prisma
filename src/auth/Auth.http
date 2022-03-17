@@ -1,0 +1,19 @@
+@ModuleEndpoint = {{ Host }}/auth
+
+###
+POST {{ ModuleEndpoint }}/signin
+Content-Type: application/json
+
+{
+	"email": "mauricio@gmail.com",
+	"password": "password"
+}
+
+###
+POST {{ ModuleEndpoint }}/signup
+Content-Type: application/json
+
+{
+	"email": "mauricio@gmail.com",
+	"password": "password"
+}

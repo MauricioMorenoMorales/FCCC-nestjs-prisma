@@ -1,0 +1,1 @@
+If there is an error of connection to database chech the ports in the docker-compose
