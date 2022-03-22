@@ -1,0 +1,5 @@
+@ModuleEndpoint = {{ Host }}/user
+
+### Get my user
+GET {{ ModuleEndpoint }}/me
+Authorization: {{ token }}
