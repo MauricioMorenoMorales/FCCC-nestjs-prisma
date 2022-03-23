@@ -18,11 +18,18 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --watch --no-cache --config ./test/jest-e2e.json",
+    "pretest:e2e": "yarn db:test:restart",
+    "test:e2e": "dotenv -e .env.test -- jest --watch --no-cache --config ./test/jest-e2e.json",
     "db:dev:restart": "yarn db:dev:rm && yarn db:dev:up && sleep 5 && yarn prisma:dev:deploy",
     "db:dev:rm": "docker-compose rm -s -f -v dev-db",
     "db:dev:up": "docker-compose up -d dev-db",
-    "prisma:dev:deploy": "prisma migrate deploy"
+    "prisma:dev:deploy": "prisma migrate deploy",
+    "db:test:restart": "yarn db:test:rm && yarn db:test:up && sleep 5 && yarn prisma:test:deploy",
+    "db:test:rm": "docker-compose rm -s -f -v test-db",
+    "db:test:up": "docker-compose up -d test-db",
+    "prisma:test:deploy": "dotenv -e .env.test -- prisma migrate deploy",
+    "prisma:test:studio": "npx dotenv -e .env.test -- prisma studio",
+    "prisma:dev:studio": "npx dotenv -e .env -- prisma studio"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
@@ -54,6 +61,7 @@
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
+    "dotenv-cli": "^5.0.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
